@@ -1,0 +1,6 @@
+{% extends 'content/gallery/p.classic.html' %}
+{% load feincms_thumbnail %}
+
+{% block image-original %}{{ picture.file.name|thumbnail:'960x650' }}{% endblock %}
+
+{% block image-remaining %}{{ picture.file.name|thumbnail:'960x650' }}{% endblock %}

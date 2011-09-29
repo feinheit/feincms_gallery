@@ -1,0 +1,21 @@
+{% load feinheit_thumbnail %}
+{% comment %}
+<!-- You have to define the image size in the image attribute for the js to work in webkit. -->
+http://www.catchmyfame.com/2010/09/13/jquery-panel-gallery-2-0-released
+There are about 40 Transition Effects.
+
+{% endcomment %}
+
+<div class="slideshow fancypanel context">
+    {% for image in images %}
+        {% if forloop.first %}
+        <div class="active">
+            {% include 'content/gallery/image.html' %}
+        </div>
+        {% else %}
+        <div>
+            {% include 'content/gallery/image.html' %}
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>

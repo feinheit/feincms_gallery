@@ -1,0 +1,73 @@
+/*------------------------------------------------------------------
+Gallery with catpion
+-------------------------------------------------------------------*/
+.gallery-content {
+    padding-bottom: 18px;
+    background: white;
+}
+
+.gallery-content .gallery_images {
+    display: table;
+}
+.gallery-content .gallery_row {
+    display: table-row;
+}
+.a-gallery-image, .gallery-cell {
+    border-collapse: collapse;
+    padding-right: 10px;
+    padding-bottom: 4px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+/*
+a.withcaption {
+    border: none;
+}
+.gallery-content .pagination {
+    height: 20px;
+}
+.gallery-content .gallery_back {
+    text-align: left;
+}
+
+.gallery-cell-img {
+    border: 4px solid white;
+}
+a.grouped_elements:hover>gallery-cell-img {
+    border: 4px solid #df1d64;
+}
+*/
+
+
+.gallery-cell-div {
+    display: block;
+    position: relative;
+    margin-bottom: 6px;
+    width: 190px; height: 152px;
+}
+
+.gallery_image_caption {
+    position: absolute;
+    display: block;
+    background: white;
+    text-align: left;
+    line-height: 1.3;
+    font-weight: normal;
+    color: black;
+    width: 100%;
+    padding: 3px 5px 3px;
+    min-height: 17px;
+    bottom: 0;
+    left: 0;
+    z-index: 200;
+}
+.rgba .gallery_image_caption {
+    background: rgba(255,255,255,0.7)
+}
+a.grouped_elements:hover .gallery_image_caption {
+    background: white;
+}

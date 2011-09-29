@@ -1,0 +1,121 @@
+{% load feincms_thumbnail feinheit_base i18n %}
+{% comment %}
+<!-- Wenn die Galerie in einem Aufklapp-Div versteckt ist,
+    muss sie bei weiteren Seiten bereits geoeffnet sein. -->
+{% if content.has_pagination %}{% if block.number > 1 %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.gallery-content').parent('div.ausklapp_content').prev('a.ausklapp').children('p').toggleClass('open');
+        $('.gallery-content').parent('div.ausklapp_content').slideDown()
+    });
+</script>
+{% endif %}{% endif %}
+
+<!-- Die Anzahl Bilde pro Zeile wird dem GalleryContent als Attribut uebergeben. -->
+{% endcomment %}
+
+<div class="gallery-content" {% context_menu content.gallery %}>
+    <div class="gallery_images">
+    {% for picture in images %}
+        {% if forloop.counter0|divisibleby:content.columns %}
+           <div class="gallery_row">
+            {% endif %}
+			    {% block gallery_row %}
+                <div class="gallery-cell">
+                    <div class="gallery-cell-div">
+                        <a href="{{ picture.file.url }}" class="grouped_elements" rel="gallery{{ content.gallery.id }}" title="{{ picture.translation.description }}">
+                            <img class="gallery-cell-img" src="{{ picture.file.name|cropscale:'190x152' }}" alt="{{ picture.translation.caption }}" />
+                            {% block caption %}{% endblock %}
+                        </a>
+                    </div>
+                </div>  			    
+            {% endblock %}
+			{% if forloop.counter|divisibleby:content.columns %}
+           </div>
+            {% else %}{%if forloop.last %}</div>{% endif %}
+          {% endif %}
+    {% empty %}
+        {% trans 'Keine Bilder' %}
+    {% endfor %}
+        <div style="display:none;">
+            {% for picture in remaining %}
+            <a href="{% block image-remaining %}{{ picture.file.url }}{% endblock %}" class="grouped_elements" rel="gallery{{ content.gallery.id }}" title="{{ picture.translation.description }}"></a>
+            {% endfor %}
+        </div>
+
+    {% if block.has_other_pages %}
+        <div class="pagination gallery_row">
+            <div class="gallery_back gallery-cell">
+                {% if block.has_previous %}
+                <a class="pagination-step-back button" href="?page={{ block.previous_page_number }}" rel="prev">{% trans '<< previous' %}</a>
+                {% endif %}
+            </div>
+            <div class="gallery_range gallery-cell">
+                {% for page in paginator.page_range %}
+                    {% if page == block.number %}{{ page }} {% else %}<a href="{{ content.parent.get_absolute_url }}?page={{ page }}">{{ page }} </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="gallery_next gallery-cell">
+                {% if block.has_next %}
+                <a class="pagination-step-forward button" href="?page={{ block.next_page_number }}" rel="next">{% trans 'next >>' %}</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+
+
+
+
+{% comment %}
+    Example CSS:
+
+    .gallery-content {
+        width: 657px; min-height: 180px;
+        background: white;
+        margin-bottom: 20px;
+    }
+    .gallery-content .gallery_images {
+        display: table;
+        border: 7px solid transparent;
+    }
+    .gallery-content .gallery_row {
+        display: table-row;
+    }
+    .gallery-content .gallery_row a.grouped_elements, .gallery-content .cell {
+        border: 7px solid transparent;
+        border-collapse: collapse;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        font-weight: bolder;
+    }
+    .gallery-content .pagination {
+        height: 20px;
+    }
+    .gallery-content .gallery_back {
+        text-align: left;
+    }
+    .gallery-content .gallery_back a {
+        background: url(../img/arrow-lt.gif) left -16px no-repeat;
+        display: block;
+        padding-left: 17px;
+    }
+    .gallery-content .gallery_back a:hover {
+        background-position: left 4px;
+    }
+    .gallery-content .gallery_next {
+        text-align: right;
+    }
+    .gallery-content .gallery_next a {
+        background: url(../img/arrow-rt.gif) right -16px no-repeat;
+        padding-right: 17px;
+        display: block;
+    }
+    .gallery-content .gallery_next a:hover {
+        background-position: right 4px;
+    }
+{% endcomment %}

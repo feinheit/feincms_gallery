@@ -1,0 +1,21 @@
+.textholder {
+    font: 11px Arial, Helvetica, sans-serif;
+    padding: 2px 4px 0 4px;
+    -moz-border-radius: 4px 4px 0 0;
+}
+.productgallery {
+    -moz-box-shadow: 0px 0px 10px #333;
+    -webkit-box-shadow:  0px 0px 10px #333;
+    box-shadow:  0px 0px 10px #333;
+    clear:right;
+    border: 2px solid #aaa;
+}
+/* only used when arrows outside the image */
+#productgalleryWrapper {
+	width: 590px;
+    height: 444px;
+	margin: 0 auto;
+}
+.productgallery+div {
+	margin-top: 4px !important;
+}

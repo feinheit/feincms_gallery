@@ -1,0 +1,19 @@
+.carousel img {
+    border:none;
+}
+.textholder {
+    font: 11px Arial, Helvetica, sans-serif;
+    padding: 2px 4px 0 4px;
+    -moz-border-radius: 4px 4px 0 0;
+}
+.carousel {
+    -moz-box-shadow: 0px 0px 10px #333;
+    -webkit-box-shadow:  0px 0px 10px #333;
+    box-shadow:  0px 0px 10px #333;
+    clear:right;
+	background: white;
+	border: 2px solid transparent;
+    margin: 40px auto 0 auto;
+    height: 140px;
+    overflow: hidden;
+}

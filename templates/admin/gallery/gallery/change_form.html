@@ -1,0 +1,56 @@
+{% extends "admin/change_form.html" %}
+{% load i18n adminmedia %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript">
+    var jQuery = django.jQuery
+    var feincms = {
+        "jQuery": jQuery
+    };
+   function update_thumbnail(){
+		var field = jQuery(this);
+        jQuery.post('/feinheit/thumbnail/',
+            {'id': this.value, 'width': 188, 'height': 142},
+            function(data){
+                   field.parent('div').css('background-image', 'url('+data['url']+')');
+				   field.prev('p.admin-gallery-image-caption').text(data['name']);
+            }, 'json');
+    }
+	
+    var LoupeClicked; // global placeholder for input field
+    
+	// wrapper for the django dismissRelatedLookup function that triggers an event on change.
+	var sendTrigger = function(fn){
+		return function(win, chosenId){
+			fn(win, chosenId);
+            LoupeClicked.trigger('blur');
+		};
+	};
+	dismissRelatedLookupPopup = sendTrigger(dismissRelatedLookupPopup);	
+	
+    (function($){
+        $(function(){
+            $('.image-fk').each(function(){
+                var elem = $(this);
+                elem.siblings('span').remove().end();
+                elem.css('width', '30px').after("<span class=\"lupe mediafile\" id=\"lookup_"+this.id+"\"> <img src=\"{% admin_media_prefix %}img/admin/selector-search.gif\" alt=\"{% trans "Search" %}\" /></span>");
+            });
+            $('span.lupe.mediafile').live('click', function(){
+				LoupeClicked = $(this).prev('input');
+                var name = id_to_windowname(this.id.replace(/^lookup_/, ''));
+                var win = window.open('{% if frontend_editing %}../../{% endif %}../../../medialibrary/mediafile/?pop=1', name, 'height=500,width=800,resizable=yes,scrollbars=yes');
+                win.focus();
+                return false;
+            });
+			$('input.image-fk').bind('blur', update_thumbnail);
+            $('.vForeignKeyRawIdAdminField').addClass('vTextField');
+        });
+    })(feincms.jQuery);
+</script>
+<style type="text/css">
+    span.mediafile { cursor: pointer; }
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
+<!--link rel="stylesheet" href="{{ FEINCMS_ADMIN_MEDIA }}admin/css/galleryadmin.css" /-->
+<link rel="stylesheet" href="{{ STATIC_URL }}admin/css/galleryadmin.css" />
+{% endblock %}

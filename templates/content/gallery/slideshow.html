@@ -1,0 +1,29 @@
+{% load feinheit_base %}
+<div class="simple slideshow context" {% context_menu content.gallery %}>
+    {% for image in images %}
+        {% if forloop.first %}
+        <div class="active">
+            {% include 'content/gallery/image.html' %}
+        </div>
+        {% else %}
+        <div>
+            {% include 'content/gallery/image.html' %}
+        </div>
+        {% endif %}
+    {% endfor %}
+    
+</div>
+
+{% comment %}
+Use this to customize the slideshow:
+
+<script type="text/javascript">
+    SQ.add(function(){
+        $('#slidemood').slideshow(
+            {                
+              'duration'  : 7500,
+              'shuffle' : true 
+            });
+    }); 
+</script>
+{% endcomment %}
