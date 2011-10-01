@@ -3,7 +3,7 @@ from django.contrib import admin
 from django import forms
 from feincms.content.medialibrary.models import MediaFile
 from feincms.admin.item_editor import ItemEditorForm
-from feinheit.gallery.models import Gallery, GalleryMediaFile
+from models import Gallery, GalleryMediaFile
 from django.utils.translation import ugettext_lazy as _, ungettext
 from feincms.templatetags import feincms_thumbnail
 from django.utils.safestring import mark_safe

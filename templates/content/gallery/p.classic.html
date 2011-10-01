@@ -23,7 +23,7 @@
 			    {% block gallery_row %}
                 <div class="gallery-cell">
                     <div class="gallery-cell-div">
-                        <a href="{{ picture.file.url }}" class="grouped_elements" rel="gallery{{ content.gallery.id }}" title="{{ picture.translation.description }}">
+                        <a href="{% block image-original %}{{ picture.file.url }}{% endblock %}" class="grouped_elements" rel="gallery{{ content.gallery.id }}" title="{{ picture.translation.description }}">
                             <img class="gallery-cell-img" src="{{ picture.file.name|cropscale:'190x152' }}" alt="{{ picture.translation.caption }}" />
                             {% block caption %}{% endblock %}
                         </a>
