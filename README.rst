@@ -24,12 +24,12 @@ Installation
 At this time, there is no prebundled installation file to install via pip or easy_install. So get
 the source at: https://github.com/feinheit/feincms_gallery
 
-* Make sure to add the ``feincms_gallery`` to your Python path.
-* Add ``feincms_gallery`` to your ``INSTALLED_APPS`` in your ``settings.py``
+* Make sure to add the ``gallery`` to your Python path.
+* Add ``gallery`` to your ``INSTALLED_APPS`` in your ``settings.py``
 
 In your ``application/models.py`` create the content type::
 
-    from feincms_gallery.models import GalleryContent
+    from gallery.models import GalleryContent
 
     Page.create_content_type(GalleryContent)
 
