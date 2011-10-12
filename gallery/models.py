@@ -58,11 +58,10 @@ class GalleryContent(models.Model):
         if 'feincms.module.medialibrary' not in settings.INSTALLED_APPS:
             raise ImproperlyConfigured, 'You have to add \'feincms.module.medialibrary\' to your INSTALLED_APPS before creating a %s' % cls.__name__
 
-        cls.specs = { '%s_%s' % (spec.name, specs.index(spec)) : spec for spec in specs }
+        cls.specs = dict([ ('%s_%s' % (spec.name, specs.index(spec)), spec) for spec in specs ])
         cls.spec_choices = [ (spec, cls.specs[spec].verbose_name ) for spec in cls.specs ]
 
-        cls.add_to_class('type', models.CharField(max_length=20,
-                                                  choices=cls.spec_choices))
+        cls.add_to_class('type', models.CharField(max_length=20, choices=cls.spec_choices, default=cls.spec_choices[0][0]))
         
     gallery = models.ForeignKey(Gallery, \
         help_text=_('Choose a gallery to render here'),
