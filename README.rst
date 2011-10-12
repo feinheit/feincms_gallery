@@ -18,6 +18,25 @@ The CSS and Javascript files for the galleries are only loaded on demand using t
 The admin frontend has thumbnail view for the gallery images and drag and drop functionality for image sorting.
 
 
+Installation
+------------
+
+At this time, there is no prebundled installation file to install via pip or easy_install. So get
+the source at: https://github.com/feinheit/feincms_gallery
+
+* Make sure to add the ``feincms_gallery`` to your Python path.
+* Add ``feincms_gallery`` to your ``INSTALLED_APPS`` in your ``settings.py``
+
+In your ``application/models.py`` create the content type::
+
+    from feincms_gallery.models import GalleryContent
+
+    Page.create_content_type(GalleryContent)
+
+
+* run ``python manage.py syncdb``
+
+
 Usage
 -----
 

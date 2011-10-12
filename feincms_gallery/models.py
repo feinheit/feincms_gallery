@@ -1,14 +1,16 @@
 #coding=utf-8
 from django import forms
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db import models
+from django.template import TemplateDoesNotExist
+from django.template.context import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import ungettext_lazy, ugettext_lazy as _
-from django.conf import settings
+
 from feincms.module.medialibrary.models import MediaFile
-from django.core.exceptions import ImproperlyConfigured
-from django.template.context import RequestContext
-from django.template import TemplateDoesNotExist
+
 
 class Gallery(models.Model):
     title = models.CharField(max_length=30)
