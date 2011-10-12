@@ -1,17 +1,19 @@
 #coding=utf-8
-from django.contrib import admin
 from django import forms
-from feincms.content.medialibrary.models import MediaFile
-from feincms.admin.item_editor import ItemEditorForm
-from models import Gallery, GalleryMediaFile
-from django.utils.translation import ugettext_lazy as _, ungettext
-from feincms.templatetags import feincms_thumbnail
-from django.utils.safestring import mark_safe
-from feincms.module.medialibrary.models import Category
+from django.contrib import admin
+from django.core.exceptions import FieldError, ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from django.core.exceptions import FieldError, ObjectDoesNotExist
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy as _, ungettext
+
+from feincms.content.medialibrary.models import MediaFile
+from feincms.module.medialibrary.models import Category
+from feincms.templatetags import feincms_thumbnail
+
+from models import Gallery, GalleryMediaFile
+
 
 class MediaFileWidget(forms.TextInput):
     """
@@ -67,18 +69,20 @@ def admin_thumbnail(obj):
 admin_thumbnail.short_description = _('Image')
 admin_thumbnail.allow_tags = True
 
+
 class MediaFileAdminForm(forms.ModelForm):
     mediafile = forms.ModelChoiceField(queryset=MediaFile.objects.filter(type='image'),
                                 widget=MediaFileWidget(attrs={'class': 'image-fk'}), label=_('media file'))
     class Meta:
         model = GalleryMediaFile
 
+
 class GalleryMediaFileAdmin(admin.ModelAdmin):
     form = MediaFileAdminForm
     model = GalleryMediaFile
     list_display = ['__unicode__', admin_thumbnail]
     classes = ['sortable']
-    
+
  
 class GalleryMediaFileInline(admin.StackedInline):
     model = GalleryMediaFile
@@ -88,6 +92,7 @@ class GalleryMediaFileInline(admin.StackedInline):
     classes = ['sortable']
     ordering = ['ordering']
     template = 'admin/gallery/gallery/stacked.html'
+
 
 class GalleryAdmin(admin.ModelAdmin):
     inlines = (GalleryMediaFileInline,)
@@ -126,5 +131,5 @@ class GalleryAdmin(admin.ModelAdmin):
     assign_category.short_description = _('Assign Images from a Category to this Gallery')
     actions = [assign_category]    
 
-   
+    
 admin.site.register(Gallery, GalleryAdmin)
