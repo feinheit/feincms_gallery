@@ -1,7 +1,11 @@
-{% load feincms_thumbnail feinheit_base i18n %}
+{% load feincms_thumbnail i18n %}
 {% comment %}
 <!-- Wenn die Galerie in einem Aufklapp-Div versteckt ist,
-    muss sie bei weiteren Seiten bereits geoeffnet sein. -->
+    muss sie bei weiteren Seiten bereits geoeffnet sein. 
+    If a gallery is hidden in a slide div it has to be
+    open on paginated pages > 1.
+    Uncomment this part if you use pagination and a slider div for the gallery.
+    -->
 {% if content.has_pagination %}{% if block.number > 1 %}
 <script type="text/javascript">
     $(document).ready(function(){
@@ -14,7 +18,7 @@
 <!-- Die Anzahl Bilde pro Zeile wird dem GalleryContent als Attribut uebergeben. -->
 {% endcomment %}
 
-<div class="gallery-content" {% context_menu content.gallery %}>
+<div class="gallery-content">
     <div class="gallery_images">
     {% for picture in images %}
         {% if forloop.counter0|divisibleby:content.columns %}
