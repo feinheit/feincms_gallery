@@ -70,13 +70,11 @@ class GalleryContent(models.Model):
 
     @property
     def spec(self):
-        
         return self.specs[self.type]
-
 
     @property
     def media(self):
-        return forms.Media(self.spec.media)
+        return forms.Media(**self.spec.media)
       
     def has_pagination(self):
         return self.spec.paginated
@@ -118,6 +116,3 @@ class GalleryContent(models.Model):
                 'images': images, 'paginator': paginator,
                 'remaining': remaining },
             context_instance = RequestContext(request))
-
-    def __unicode__(self):
-        return unicode(self.spec.name)
