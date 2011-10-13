@@ -112,6 +112,5 @@ class GalleryContent(models.Model):
         print self.spec.templates
 
         return render_to_string(self.spec.templates, {'content': self, 'block':current_page,
-                'images': images, 'paginator': paginator,
-                'remaining': remaining },
+                'images': images, 'paginator': paginator, 'remaining': remaining, 'request': request },
             context_instance = RequestContext(request))
