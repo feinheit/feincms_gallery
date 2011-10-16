@@ -1,14 +1,16 @@
 #coding=utf-8
 from django import forms
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db import models
+from django.template import TemplateDoesNotExist
+from django.template.context import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import ungettext_lazy, ugettext_lazy as _
-from django.conf import settings
+
 from feincms.module.medialibrary.models import MediaFile
-from django.core.exceptions import ImproperlyConfigured
-from django.template.context import RequestContext
-from django.template import TemplateDoesNotExist
+
 
 class Gallery(models.Model):
     title = models.CharField(max_length=30)
@@ -55,35 +57,39 @@ class GalleryMediaFile(models.Model):
     Make sure your base template has {{ feincms_page.content.media.js }} in the header and
     {{ feincms_page.content.media.js }} at the end.
 """
-    
+
 GALLERY_TYPE_CHOICES = (
-                       #('p.classic' , _('Classic Gallery with full size lightbox.')),
-                       #('p.clasiccaption' , _('Classic Gallery with caption and full size lightbox.')),
-                       ('p.classiclm' , _('Classic Gallery with Lightbox.')),
-                       ('p.classiclmcaption' , _('Classic Gallery with caption and Lightbox.')),
-                       ('carousel', _('Single line Strip Board')),
-                       ('panel', _('Fancy Panel')),
-                       ('slideshow', _('Simple Slideshow')),
-                       ('product', _('Product Gallery')),
-)
+    #('p.classic' , _('Classic Gallery with full size lightbox.')),
+    #('p.clasiccaption' , _('Classic Gallery with caption and full size lightbox.')),
+    ('p.classiclm', _('Classic Gallery with Lightbox.')),
+    ('p.classiclmcaption', _('Classic Gallery with caption and Lightbox.')),
+    ('carousel', _('Single line Strip Board')),
+    ('panel', _('Fancy Panel')),
+    ('slideshow', _('Simple Slideshow')),
+    ('product', _('Product Gallery')),
+    )
 
 standard_gallery_media = {'css':{'all':('content/gallery/classic.css',)}}
 
 DEFAULT_FORM_MEDIA_DICT = {'gallery': {'css': {'all': ('lib/fancybox/jquery.fancybox-1.3.1.css', )},
-                                          'js': ('lib/fancybox/jquery.fancybox-1.3.1.pack.js', '/media/content/gallery/gallery.js')},
-                    'gallery_p.classic': standard_gallery_media,                         
-                  'gallery_p.clasiccaption': standard_gallery_media,
-                  'gallery_p.classiclm': standard_gallery_media,
-                'gallery_p.classiclmcaption': standard_gallery_media,
-                'gallery_slideshow': {'css':{'all':('content/gallery/slideshow.css',)},
-                                                 'js':('content/gallery/slideshow.js',)},
-                'gallery_carousel': {'css':{'all':('content/gallery/carousel.css',)},
-                                                 'js':('content/gallery/jquery.infinitecarousel2.min.js','content/gallery/carousel.js',)},
-                'gallery_panel': {'js':('content/gallery/jquery.panelgallery-2.0.0.min.js','content/gallery/panelgallery.js')},
-                'gallery_product': {'css':{'all':('content/gallery/product.css',)},
-                                                 'js':('content/gallery/jquery.infinitecarousel2.min.js','content/gallery/product.js',)},
-                                
-}
+                                       'js': ('lib/fancybox/jquery.fancybox-1.3.1.pack.js',
+                                              '/media/content/gallery/gallery.js')},
+                           'gallery_p.classic': standard_gallery_media,
+                           'gallery_p.clasiccaption': standard_gallery_media,
+                           'gallery_p.classiclm': standard_gallery_media,
+                           'gallery_p.classiclmcaption': standard_gallery_media,
+                           'gallery_slideshow': {'css': {'all': ('content/gallery/slideshow.css',)},
+                                                 'js': ('content/gallery/slideshow.js',)},
+                           'gallery_carousel': {'css': {'all': ('content/gallery/carousel.css',)},
+                                                'js': ('content/gallery/jquery.infinitecarousel2.min.js',
+                                                       'content/gallery/carousel.js',)},
+                           'gallery_panel': {'js': (
+                           'content/gallery/jquery.panelgallery-2.0.0.min.js', 'content/gallery/panelgallery.js')},
+                           'gallery_product': {'css': {'all': ('content/gallery/product.css',)},
+                                               'js': ('content/gallery/jquery.infinitecarousel2.min.js',
+                                                      'content/gallery/product.js',)},
+
+                           }
 
 class GalleryContent(models.Model):
     @classmethod
