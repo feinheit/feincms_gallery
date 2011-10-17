@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db import models
-from django.template import TemplateDoesNotExist
+from django.http import HttpResponse
 from django.template.context import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import ungettext_lazy, ugettext_lazy as _
@@ -83,6 +83,9 @@ class GalleryContent(models.Model):
         verbose_name = _('Image Gallery')
         verbose_name_plural = _('Image Galleries')
 
+    def process(self, request, **kwargs):
+        if int(request.GET.get('gallery', 0)) == self.id and request.is_ajax():
+            return HttpResponse(self.render(request, **kwargs))
 
     def render(self, request, **kwargs):
         objects = self.gallery.ordered_images()
