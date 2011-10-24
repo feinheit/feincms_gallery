@@ -1,4 +1,4 @@
-{% load feincms_thumbnail i18n %}
+{% load feincms_thumbnail i18n feinheit_base %}
 {% comment %}
 <!-- Wenn die Galerie in einem Aufklapp-Div versteckt ist,
     muss sie bei weiteren Seiten bereits geoeffnet sein. 
@@ -18,7 +18,7 @@
 <!-- Die Anzahl Bilde pro Zeile wird dem GalleryContent als Attribut uebergeben. -->
 {% endcomment %}
 
-<div class="gallery-content">
+<div class="gallery-content" {% context_menu content.gallery %}>
     <div class="gallery_images">
     {% for picture in images %}
         {% if forloop.counter0|divisibleby:content.columns %}
@@ -72,54 +72,3 @@
 
 
 
-
-
-{% comment %}
-    Example CSS:
-
-    .gallery-content {
-        width: 657px; min-height: 180px;
-        background: white;
-        margin-bottom: 20px;
-    }
-    .gallery-content .gallery_images {
-        display: table;
-        border: 7px solid transparent;
-    }
-    .gallery-content .gallery_row {
-        display: table-row;
-    }
-    .gallery-content .gallery_row a.grouped_elements, .gallery-content .cell {
-        border: 7px solid transparent;
-        border-collapse: collapse;
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
-        font-weight: bolder;
-    }
-    .gallery-content .pagination {
-        height: 20px;
-    }
-    .gallery-content .gallery_back {
-        text-align: left;
-    }
-    .gallery-content .gallery_back a {
-        background: url(../img/arrow-lt.gif) left -16px no-repeat;
-        display: block;
-        padding-left: 17px;
-    }
-    .gallery-content .gallery_back a:hover {
-        background-position: left 4px;
-    }
-    .gallery-content .gallery_next {
-        text-align: right;
-    }
-    .gallery-content .gallery_next a {
-        background: url(../img/arrow-rt.gif) right -16px no-repeat;
-        padding-right: 17px;
-        display: block;
-    }
-    .gallery-content .gallery_next a:hover {
-        background-position: right 4px;
-    }
-{% endcomment %}

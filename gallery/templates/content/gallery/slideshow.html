@@ -1,4 +1,5 @@
-<div class="simple slideshow context">
+{% load feinheit_base %}
+<div class="simple slideshow context" {% context_menu content.gallery %}>
     {% for image in images %}
         {% if forloop.first %}
         <div class="active">
