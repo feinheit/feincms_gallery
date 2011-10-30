@@ -73,7 +73,7 @@ standard_gallery_media = {'css':{'all':('content/gallery/classic.css',)}}
 
 DEFAULT_FORM_MEDIA_DICT = {'gallery': {'css': {'all': ('lib/fancybox/jquery.fancybox-1.3.1.css', )},
                                        'js': ('lib/fancybox/jquery.fancybox-1.3.1.pack.js',
-                                              '/media/content/gallery/gallery.js')},
+                                              'content/gallery/gallery.js')},
                            'gallery_p.classic': standard_gallery_media,
                            'gallery_p.clasiccaption': standard_gallery_media,
                            'gallery_p.classiclm': standard_gallery_media,

@@ -1,4 +1,4 @@
 
 
 class Base(object):
-    
+    pass

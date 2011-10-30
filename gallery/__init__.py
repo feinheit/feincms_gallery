@@ -26,7 +26,7 @@ Type Choices example::
                        ('product', _('Projektgalerie')),
                        ('slideshow', _('Moodboard')),
                        ('overview', _(u'Übersicht')),
-                       
+
 
 Media dict example::
 
@@ -40,9 +40,9 @@ Media dict example::
                     'gallery_product': {'css':{'all':('/media/content/gallery/product.css','/media/content/gallery/anythingslider.css',
                                                       '/media/content/gallery/anythingslider-ie.css')},
                                                      'js':('/media/content/gallery/jquery.anythingslider.min.js','/media/content/gallery/product.js',)},
-                                    
+
     }
-    
+
 By default the css and javascript files for the galleries are taken from the static folder 
 and should not be altered. To customize a gallery move the media files to your media folder and
 adjust the path in the FORM_MEDIA_DICT.
@@ -51,3 +51,17 @@ When replacing an image file in the admin frontend, you have to save the page fo
 to update itself.
 
 """
+VERSION = (1, 0, 0, 'beta', 2)
+
+def get_version():
+    version = '%s.%s' % (VERSION[0], VERSION[1])
+    if VERSION[2]:
+        version = '%s.%s' % (version, VERSION[2])
+    if VERSION[3:] == ('alpha', 0):
+        version = '%s pre-alpha' % version
+    else:
+        if VERSION[3] != 'final':
+            version = "%s %s" % (version, VERSION[3])
+            if VERSION[4] != 0:
+                version = '%s %s' % (version, VERSION[4])
+    return version
