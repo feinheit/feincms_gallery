@@ -51,7 +51,7 @@ When replacing an image file in the admin frontend, you have to save the page fo
 to update itself.
 
 """
-VERSION = (1, 0, 0, 'beta', 1)
+VERSION = (1, 0, 0, 'beta', 2)
 
 def get_version():
     version = '%s.%s' % (VERSION[0], VERSION[1])
