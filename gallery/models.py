@@ -110,14 +110,14 @@ class GalleryContent(models.Model):
 
     @property
     def media(self):
-        media = forms.Media()
-        media.add_css(self.FORM_MEDIA_DICT['gallery'].get('css'))
-        media.add_js(self.FORM_MEDIA_DICT['gallery'].get('js'))
+        fmedia = forms.Media()
+        fmedia.add_css(self.FORM_MEDIA_DICT['gallery'].get('css', {}))
+        fmedia.add_js(self.FORM_MEDIA_DICT['gallery'].get('js', ''))
         if self.FORM_MEDIA_DICT.get('gallery_%s' %self.type, None):
-            media.add_css(self.FORM_MEDIA_DICT['gallery_%s'%self.type].get('css', {}))
-            media.add_js(self.FORM_MEDIA_DICT['gallery_%s'%self.type].get('js', ''))
+            fmedia.add_css(self.FORM_MEDIA_DICT['gallery_%s'%self.type].get('css', {}))
+            fmedia.add_js(self.FORM_MEDIA_DICT['gallery_%s'%self.type].get('js', ''))
         
-        return media
+        return fmedia
       
     def has_pagination(self):
         return self.type[:2] == 'p.'    
