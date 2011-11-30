@@ -1,0 +1,5 @@
+recursive-include gallery/templates *.html
+recursive-include gallery/static *
+recursive-include gallery/media *
+include AUTHORS
+include LICENSE
