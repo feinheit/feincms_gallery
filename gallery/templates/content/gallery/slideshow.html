@@ -15,13 +15,18 @@
 
 {% comment %}
 Use this to customize the slideshow:
+For shuffeling use the randomize filter instead of the shuffle property.
+This way even the first image is random: 
+
+    {% load gallery_tags %}
+    {% for image in images|randomize %}
 
 <script type="text/javascript">
     SQ.add(function(){
         $('#slidemood').slideshow(
             {                
               'duration'  : 7500,
-              'shuffle' : true 
+              'shuffle' : false 
             });
     }); 
 </script>
