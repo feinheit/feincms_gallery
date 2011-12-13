@@ -128,7 +128,8 @@ class GalleryContent(models.Model):
         verbose_name_plural = _('Image Galleries')
 
 
-    def render(self, request, **kwargs):
+    def render(self, **kwargs):
+        request = kwargs.get('request')
         objects = self.gallery.ordered_images()
         remaining = []
         if len(objects) == 1:
