@@ -4,7 +4,7 @@ $(function(){
         displayTime: 6000,
         inView:3,
 		displayThumbnails: false,
-        imagePath: '/media/sys/feinheit/img/gallery/',
+        imagePath: '/static/content/gallery/images/',
         advance:1,
         easeLeft: 'swing',
         easeRight:'swing',

@@ -33,7 +33,7 @@ Media dict example::
     standard_gallery_media = {'css':{'all':('content/gallery/classic.css',)}}
 
     FORM_MEDIA_DICT = {'gallery': {'css': {'all': ('lib/fancybox/jquery.fancybox-1.3.1.css', )},
-                                              'js': ('lib/fancybox/jquery.fancybox-1.3.1.pack.js', '/media/content/gallery/gallery.js')},
+                                              'js': ('lib/fancybox/jquery.fancybox-1.3.1.pack.js', 'content/gallery/gallery.js')},
                     'gallery_slideshow': {'css':{'all':('/media/content/gallery/slideshow.css',)},
                                                      'js':('content/gallery/slideshow.js',)},
                     'gallery_panel': {'js':('content/gallery/jquery.panelgallery-2.0.0.min.js','content/gallery/panelgallery.js')},
