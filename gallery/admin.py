@@ -36,7 +36,8 @@ class MediaFileWidget(forms.TextInput):
 
             if mf.type == 'image':
                 image = feincms_thumbnail.thumbnail(mf.file.name, '188x142')
-                image = u'background: url(%(url)s) center center no-repeat;' % {'url': image}
+                image = u'background: url(%(url)s) center center no-repeat;' \
+                          % {'url': image}
             else:
                 image = u''
 
@@ -55,7 +56,8 @@ def admin_thumbnail(obj):
     if obj.mediafile.type == 'image':
         image = None
         try:
-            image = feincms_thumbnail.thumbnail(obj.mediafile.file.name, '100x100')
+            image = feincms_thumbnail.thumbnail(obj.mediafile.file.name,
+                                                '100x100')
         except:
             pass
 
@@ -72,8 +74,10 @@ admin_thumbnail.allow_tags = True
 
 
 class MediaFileAdminForm(forms.ModelForm):
-    mediafile = forms.ModelChoiceField(queryset=MediaFile.objects.filter(type='image'),
-                                widget=MediaFileWidget(attrs={'class': 'image-fk'}), label=_('media file'))
+    mediafile = forms.ModelChoiceField(
+                            queryset=MediaFile.objects.filter(type='image'),
+                            widget=MediaFileWidget(attrs={'class': 'image-fk'}),
+                            label=_('media file'))
     class Meta:
         model = GalleryMediaFile
 
@@ -114,22 +118,29 @@ class GalleryAdmin(admin.ModelAdmin):
                 for gallery in queryset:
                     for mediafile in mediafiles:
                         try: 
-                            GalleryMediaFile.objects.create(gallery = gallery, mediafile=mediafile)
+                            GalleryMediaFile.objects.create(gallery = gallery,
+                                                            mediafile=mediafile)
                         except FieldError:
                             pass                      
                         count += 1
-                message = ungettext('Successfully added %(count)d mediafiles in %(category)s Category.',
-                                    'Successfully added %(count)d mediafiles in %(category)s Categories.', count) % {
+                message = ungettext('Successfully added %(count)d mediafiles '
+                                    'in %(category)s Category.',
+                                    'Successfully added %(count)d mediafiles '
+                                    'in %(category)s Categories.', count) % {
                                     'count':count, 'category':category }
                 self.message_user(request, message)
                 return HttpResponseRedirect(request.get_full_path())
 
         if not form:
-            form = self.AddCategoryForm(initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
-        return render_to_response('admin/gallery/add_category.html', {'mediafiles': queryset,
-                                                         'category_form': form,
-                                                        }, context_instance=RequestContext(request))
-    assign_category.short_description = _('Assign Images from a Category to this Gallery')
+            form = self.AddCategoryForm(
+                initial={'_selected_action': request.POST.getlist(
+                                                admin.ACTION_CHECKBOX_NAME)})
+        return render_to_response('admin/gallery/add_category.html',
+                                            {'mediafiles': queryset,
+                                             'category_form': form },
+                                  context_instance=RequestContext(request))
+    assign_category.short_description = _('Assign Images from a Category '
+                                          'to this Gallery')
     actions = [assign_category]    
 
     

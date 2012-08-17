@@ -19,15 +19,18 @@ class Gallery(models.Model):
     images = models.ManyToManyField(MediaFile, through='GalleryMediaFile')
     
     def ordered_images(self):
-        return self.images.select_related().all().order_by('gallerymediafile__ordering')
+        return self.images.select_related().all()\
+                                        .order_by('gallerymediafile__ordering')
     
     def count_images(self):
-        return self.images.all().count()
-    
+        if not getattr(self, '_image_count', None):
+            self._image_count = self.images.count()
+        return self._image_count
+
     def verbose_images(self):
         count = self.count_images()
-        return ungettext_lazy('%(count)d Image', '%(count)d Images', count) % {
-                                                'count': count,}
+        return ungettext_lazy('%(count)d Image',
+                              '%(count)d Images', count) % {'count': count }
     verbose_images.short_description = _('Image Count')
     
     class Meta:
@@ -56,14 +59,20 @@ class GalleryContent(models.Model):
     @classmethod
     def initialize_type(cls, specs=DEFAULT_SPECS, **kwargs):
         if 'feincms.module.medialibrary' not in settings.INSTALLED_APPS:
-            raise ImproperlyConfigured, 'You have to add \'feincms.module.medialibrary\' to your INSTALLED_APPS before creating a %s' % cls.__name__
+            raise ImproperlyConfigured, 'You have to add \'feincms.module.'\
+                'medialibrary\' to your INSTALLED_APPS before creating a %s' \
+                % cls.__name__
 
-        cls.specs = dict([ ('%s_%s' % (spec.name, specs.index(spec)), spec) for spec in specs ])
-        cls.spec_choices = [ (spec, cls.specs[spec].verbose_name ) for spec in cls.specs ]
+        cls.specs = dict([ ('%s_%s' % (spec.name, specs.index(spec)), spec)
+                                       for spec in specs ])
+        cls.spec_choices = [ (spec, cls.specs[spec].verbose_name )
+                                       for spec in cls.specs ]
 
-        cls.add_to_class('type', models.CharField(max_length=20, choices=cls.spec_choices, default=cls.spec_choices[0][0]))
+        cls.add_to_class('type', models.CharField(max_length=20,
+                                 choices=cls.spec_choices,
+                                 default=cls.spec_choices[0][0]))
         
-    gallery = models.ForeignKey(Gallery, \
+    gallery = models.ForeignKey(Gallery,
         help_text=_('Choose a gallery to render here'),
         related_name='%(app_label)s_%(class)s_gallery')
 
@@ -94,7 +103,8 @@ class GalleryContent(models.Model):
 
         # check if the type is paginated
         if self.has_pagination():
-            paginator = Paginator(objects, self.spec.paginate_by, orphans=self.spec.orphans)
+            paginator = Paginator(objects, self.spec.paginate_by,
+                                  orphans=self.spec.orphans)
             try:
                 page = int(request.GET.get('page', 1))
             except ValueError:
@@ -115,6 +125,8 @@ class GalleryContent(models.Model):
 
         print self.spec.templates
 
-        return render_to_string(self.spec.templates, {'content': self, 'block':current_page,
-                'images': images, 'paginator': paginator, 'remaining': remaining, 'request': request },
+        return render_to_string(self.spec.templates,
+                {'content': self, 'block':current_page,
+                'images': images, 'paginator': paginator,
+                'remaining': remaining, 'request': request },
             context_instance = RequestContext(request))

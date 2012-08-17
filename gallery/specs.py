@@ -1,18 +1,18 @@
 from django.utils.translation import ungettext_lazy, ugettext_lazy as _
 
-class Base(object):
-    template_path = 'content/gallery'
-    default_template = '%s/classiclm.html' % template_path
+class BaseGallery(object):
+    template_path = 'content/gallery/'
+    default_template = '%sclassiclm.html' % template_path
     paginated = False
 
     @property
     def templates(self):
         templates = [
-            '%s/%s.html' % (self.template_path, self.__class__.__name__.lower()),
+            '%s%s.html' % (self.template_path, self.__class__.__name__.lower()),
             self.default_template ]
 
         if hasattr(self, 'template_name'):
-            templates.insert(0, '%s/%s' % (self.template_path, self.template_name))
+            templates.insert(0, '%s%s' % (self.template_path, self.template_name))
         return templates
 
     @property
@@ -25,8 +25,8 @@ class Base(object):
             setattr(self, arg, kwargs[arg])
 
 
-class ClassicLightbox(Base):
-    verbose_name = _('Classic Gallery with Lightbox.')
+class ClassicLightbox(BaseGallery):
+    verbose_name = _('Classic Gallery with Lightbox (paginated).')
     paginated = True
     paginate_by = 12
     orphans = 3
