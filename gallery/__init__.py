@@ -13,7 +13,8 @@ Add a link to the gallery URLs to your urls.py (for the admin)::
 
 You can use standard types or define your own gallery types like this::
 
-    from gallery import specs, GalleryContent
+    from gallery import specs
+    from gallery.models import GalleryContent
 
     GALLERY_TYPES = [
         specs.ClassicLightbox(),  # standard type
@@ -104,5 +105,3 @@ to update itself.
 
 VERSION = (1, 1, 0)
 __version__ = '.'.join(map(str, VERSION))
-
-from .models import GalleryContent
