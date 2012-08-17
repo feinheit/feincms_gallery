@@ -5,6 +5,12 @@ Usage
 
 Add :mod:`feinheit.gallery` to your :mod:`settings.INSTALLED_APPS`
 
+Add a link to the gallery URLs to your urls.py (for the admin)::
+
+    urlpatterns += patterns('',
+        url(r'^gallery/', include('gallery.urls')),
+    )
+
 You can use standard types or define your own gallery types like this::
 
     from gallery import specs, GalleryContent
