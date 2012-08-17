@@ -5,7 +5,51 @@ Usage
 
 Add :mod:`feinheit.gallery` to your :mod:`settings.INSTALLED_APPS`
 
+You can use standard types or define your own gallery types like this::
+
+    from gallery import specs, GalleryContent
+
+    GALLERY_TYPES = [
+        specs.ClassicLightbox(),  # standard type
+        specs.Type(
+            verbose_name=_('Fancy paginated gallery'),
+            paginated=True,
+            paginate_by=12,
+            orphans=4,
+            template_name='fancy_gallery.html',
+            media={'css' : {'all' :
+                        ('gallery/gallery.css',
+                         'lib/fancybox/jquery.fancybox-1.3.1.css'),},
+                    'js' :
+                        ('gallery/gallery.js',
+                         'lib/fancybox/jquery.fancybox-1.3.1.pack.js')
+            }
+        )
+    ]
+
+    Page.create_content_type(GalleryContent, regions=('main',),
+                                             types=GALLERY_TYPES)
+
+
+By default the css and javascript files for the galleries are taken from the
+static folder and should not be altered.
+To customize a default gallery, move the media files to your media folder and
+adjust the path in the FORM_MEDIA_DICT.
+
+When replacing an image file in the admin frontend,
+you have to save the page for the thumbnail to update itself.
+
+
+
+
+OLD VERSION:
+
+
+Add :mod:`feinheit.gallery` to your :mod:`settings.INSTALLED_APPS`
+
 Create the content type in your models.py::
+
+    from gallery.models import GalleryContent
 
     Page.create_content_type(GalleryContent, TYPE_CHOICES=GALLERY_TYPE_CHOICES,
                          FORM_MEDIA_DICT=FORM_MEDIA_DICT, regions=('main', 'moodboard'))
@@ -52,5 +96,7 @@ to update itself.
 
 """
 
-VERSION = (1, 0, 3)
+VERSION = (1, 1, 0)
 __version__ = '.'.join(map(str, VERSION))
+
+from .models import GalleryContent

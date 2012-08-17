@@ -1,43 +1,24 @@
-from django.utils.translation import ungettext_lazy, ugettext_lazy as _
+""" Dowload fancybox from:
+    http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip
+"""
 
-class BaseGallery(object):
-    template_path = 'content/gallery/'
-    default_template = '%sclassiclm.html' % template_path
-    paginated = False
+from django.utils.translation import ugettext_lazy as _
+from .base import BaseSpec
 
-    @property
-    def templates(self):
-        templates = [
-            '%s%s.html' % (self.template_path, self.__class__.__name__.lower()),
-            self.default_template ]
-
-        if hasattr(self, 'template_name'):
-            templates.insert(0, '%s%s' % (self.template_path, self.template_name))
-        return templates
-
-    @property
-    def name(self):
-        return self.__class__.__name__
-
-    @classmethod
-    def __init__(self, **kwargs):
-        for arg in kwargs:
-            setattr(self, arg, kwargs[arg])
-
-
-class ClassicLightbox(BaseGallery):
+class ClassicLightbox(BaseSpec):
     verbose_name = _('Classic Gallery with Lightbox (paginated).')
     paginated = True
     paginate_by = 12
     orphans = 3
     columns = 3
     template_name = 'p.classiclm.html'
+    name = 'p.classiclm'
 
     media = {
-        'css': {'all': ('lib/fancybox/jquery.fancybox-1.3.1.css',
+        'css': {'all': ('lib/fancybox/jquery.fancybox-1.3.4.css',
                         'content/gallery/classic.css')},
-        'js': ('lib/fancybox/jquery.fancybox-1.3.1.pack.js',
-               '/media/content/gallery/gallery.js'),
+        'js': ('lib/fancybox/jquery.fancybox-1.3.4.pack.js',
+               'content/gallery/gallery.js'),
     }
 
 DEFAULT_SPECS = (ClassicLightbox(),)

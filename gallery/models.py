@@ -11,8 +11,9 @@ from django.utils.translation import ungettext_lazy, ugettext_lazy as _
 
 from feincms.module.medialibrary.models import MediaFile
 
-from .specs import DEFAULT_SPECS
+from .specs.legacy import DEFAULT_SPECS
 
+__all__ = ['Gallery', 'GalleryMediaFile', 'GalleryContent', 'DEFAULT_SPECS']
 
 class Gallery(models.Model):
     title = models.CharField(max_length=30)
@@ -57,14 +58,14 @@ class GalleryMediaFile(models.Model):
 
 class GalleryContent(models.Model):
     @classmethod
-    def initialize_type(cls, specs=DEFAULT_SPECS, **kwargs):
+    def initialize_type(cls, types=DEFAULT_SPECS, **kwargs):
         if 'feincms.module.medialibrary' not in settings.INSTALLED_APPS:
             raise ImproperlyConfigured, 'You have to add \'feincms.module.'\
                 'medialibrary\' to your INSTALLED_APPS before creating a %s' \
                 % cls.__name__
 
-        cls.specs = dict([ ('%s_%s' % (spec.name, specs.index(spec)), spec)
-                                       for spec in specs ])
+        cls.specs = dict([ ('%s_%s' % (spec.name, types.index(spec)), spec)
+                                       for spec in types ])
         cls.spec_choices = [ (spec, cls.specs[spec].verbose_name )
                                        for spec in cls.specs ]
 
@@ -122,8 +123,6 @@ class GalleryContent(models.Model):
         else:
             current_page, paginator = None, None
             images = objects
-
-        print self.spec.templates
 
         return render_to_string(self.spec.templates,
                 {'content': self, 'block':current_page,

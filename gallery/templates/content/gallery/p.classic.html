@@ -21,7 +21,7 @@
 <div class="gallery-content">
     <div class="gallery_images">
     {% for picture in images %}
-        {% if forloop.counter0|divisibleby:content.columns %}
+        {% if forloop.counter0|divisibleby:content.spec.columns %}
            <div class="gallery_row">
             {% endif %}
 			    {% block gallery_row %}
@@ -34,7 +34,7 @@
                     </div>
                 </div>  			    
             {% endblock %}
-			{% if forloop.counter|divisibleby:content.columns %}
+			{% if forloop.counter|divisibleby:content.spec.columns %}
            </div>
             {% else %}{%if forloop.last %}</div>{% endif %}
           {% endif %}
