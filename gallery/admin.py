@@ -13,8 +13,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _, ungettext
 from django.views.decorators.csrf import csrf_exempt
 
-from feincms.content.medialibrary.models import MediaFile
-from feincms.module.medialibrary.models import Category
+from feincms.module.medialibrary.models import Category, MediaFile
 from feincms.templatetags import feincms_thumbnail
 
 from models import Gallery, GalleryMediaFile
