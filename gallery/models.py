@@ -79,7 +79,10 @@ class GalleryContent(models.Model):
 
     @property
     def spec(self):
-        return self.specs[self.type]
+        try:
+            return self.specs[self.type]
+        except KeyError:
+            return DEFAULT_SPECS[0]
 
     @property
     def media(self):
