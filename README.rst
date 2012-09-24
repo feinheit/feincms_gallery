@@ -36,7 +36,7 @@ In your ``application/models.py`` create the content type::
 
 * run ``python manage.py syncdb``
 
-* add ```{{ feincms_page.content.media }}``` (or media.js and media.css) to the ```<head>``` of your template.
+* add ``{{ feincms_page.content.media }}`` (or media.js and media.css) to the ``<head>`` of your template.
 
 
 Usage
