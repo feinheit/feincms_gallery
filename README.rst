@@ -26,6 +26,7 @@ the source at: https://github.com/feinheit/feincms_gallery
 
 * Make sure to add the ``gallery`` to your Python path.
 * Add ``gallery`` to your ``INSTALLED_APPS`` in your ``settings.py``
+* Add ``url(r'^gallery/', include('gallery.urls')),`` to your ``urls.py``
 
 In your ``application/models.py`` create the content type::
 
