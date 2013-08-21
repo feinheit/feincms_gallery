@@ -43,11 +43,11 @@ In your ``application/models.py`` create the content type::
 Usage
 -----
 
-Für jeden Galerie-Typ gibt es ein Template, ein JavaScript und ein CSS. Diese sind im Order Templates/content/gallery, bzw. Static/content/gallery.
-Für die Typen Carousel, Panel und Product gibt es einen Link zur Doku-Seite als Kommentar im JS File.
+For each type, there is a gallery template, a JavaScript and CSS. They are in the folder templates/content/gallery, or static/content/gallery.
+For the types carousel, panel and product there is a link to the document page as a comment in the JS file.
 
-Um die Galerie an die Seite anzupassen, am besten das CSS und JS in den eigenen Media-Ordner kopieren und dort bearbeiten. Die Konfigurationen sind in separaten Dateien.
+To customize the gallery to your site, it's best to copy the CSS and JS in your own media folder and edit it there. The configurations are stored in separate files.
 
-Damit man Fancybox init anpassen kann, muss die Datei gallery.js aus dem gallery/media Ordner in den Projekt-Medien-Ordner kopiert werden.
+To be able to adjust fancybox.init(), the gallery.js file from the gallery/media folder must be copied to the project media folder.
 
-Es gibt die Möglichkeit, ein Fallback Template zu definieren, falls die Galerie nur ein Bild enthält. Z.B. für product.html wäre das Fallback-Template image_product.html. 
+It is possible to define a template fallback, if a gallery contains only one image. E.g. product.html has the fallback template image_product.html.
