@@ -43,11 +43,46 @@ In your ``application/models.py`` create the content type::
 Usage
 -----
 
-For each type, there is a gallery template, a JavaScript and CSS. They are in the folder templates/content/gallery, or static/content/gallery.
+For each type, there is a gallery template, a JavaScript and CSS.
+They are in the folder templates/content/gallery, or static/content/gallery.
 For the types carousel, panel and product there is a link to the document page as a comment in the JS file.
 
-To customize the gallery to your site, it's best to copy the CSS and JS in your own media folder and edit it there. The configurations are stored in separate files.
+To customize the gallery to your site, it's best to copy the CSS and JS in
+your own media folder and edit it there. The configurations are stored in separate files.
 
-To be able to adjust fancybox.init(), the gallery.js file from the gallery/media folder must be copied to the project media folder.
+To be able to adjust fancybox.init(), the gallery.js file from the
+gallery/media folder must be copied to the project media folder.
 
-It is possible to define a template fallback, if a gallery contains only one image. E.g. product.html has the fallback template image_product.html.
+It is possible to define a template fallback, if a gallery contains only one image.
+E.g. product.html has the fallback template image_product.html.
+
+You can use standard types or define your own gallery types like this::
+
+    from gallery import specs
+    from gallery.models import GalleryContent
+
+    GALLERY_TYPES = [
+        specs.ClassicLightbox(),  # standard type
+        specs.Type(
+            verbose_name=_('Fancy paginated gallery'),
+            paginated=True,
+            paginate_by=12,
+            orphans=4,
+            template_name='fancy_gallery.html',
+            media={'css' : {'all' :
+                        ('gallery/gallery.css',
+                         'lib/fancybox/jquery.fancybox-1.3.1.css'),},
+                    'js' :
+                        ('gallery/gallery.js',
+                         'lib/fancybox/jquery.fancybox-1.3.1.pack.js')
+            }
+        )
+    ]
+
+    Page.create_content_type(GalleryContent, regions=('main',),
+                                             types=GALLERY_TYPES)
+
+
+
+When replacing an image file in the admin frontend,
+you have to save the page for the thumbnail to update itself.

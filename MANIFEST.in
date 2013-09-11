@@ -3,3 +3,4 @@ recursive-include gallery/static *
 recursive-include gallery/media *
 include AUTHORS
 include LICENSE
+include README.rst
