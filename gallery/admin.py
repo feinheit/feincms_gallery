@@ -82,10 +82,14 @@ def admin_thumbnail(request):
                 pass
 
             if image:
+                try:
+                    caption = obj.translation.caption
+                except AttributeError:
+                    caption = _(u'untitled').encode('utf-8')
                 content = json.dumps({
                     'url': image.url,
-                    'name': escapejs(obj.translation.caption)
-                    })
+                    'name': escapejs(caption)
+                })
         return HttpResponse(content, mimetype='application/json')
     else:
         return HttpResponseForbidden()
