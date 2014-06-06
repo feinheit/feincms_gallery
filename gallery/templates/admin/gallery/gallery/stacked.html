@@ -13,7 +13,7 @@
       {% for fieldset in inline_admin_form %}
         {% include "admin/gallery/gallery/fieldset.html" %}
       {% endfor %}
-      {% if inline_admin_form.has_auto_field %}{{ inline_admin_form.pk_field.field }}{% endif %}
+      {% if inline_admin_form.pk_field %}{{ inline_admin_form.pk_field.field }}{% endif %}
       {{ inline_admin_form.fk_field.field }}
 
   </div>{% endfor %}
@@ -22,6 +22,9 @@
 </div>
 
 <script type="text/javascript">
+
+$ = django.jQuery;
+
 (function($) {
     $(document).ready(function() {
         $( "#sort-container" ).sortable({
