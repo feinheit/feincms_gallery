@@ -90,7 +90,7 @@ def admin_thumbnail(request):
                     'url': image.url,
                     'name': escapejs(caption)
                 })
-        return HttpResponse(content, mimetype='application/json')
+        return HttpResponse(content, content_type='application/json')
     else:
         return HttpResponseForbidden()
 admin_thumbnail.short_description = _('Image')
