@@ -86,3 +86,10 @@ You can use standard types or define your own gallery types like this::
 
 When replacing an image file in the admin frontend,
 you have to save the page for the thumbnail to update itself.
+
+
+Release History
+---------------
+
+- 1.2.3: Rename popup parameter to be consisten with newer Django versions.
+- 1.2.2: The latest version compatible with Django 1.5
