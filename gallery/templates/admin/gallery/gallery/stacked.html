@@ -92,7 +92,6 @@ $ = django.jQuery;
             emptyCssClass: "empty-form",
             removed: updateInlineLabel,
             added: (function(row) {
-				fixId(row);
                 initPrepopulatedFields(row);
                 reinitDateTimeShortCuts();
                 updateSelectFilter();
