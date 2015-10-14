@@ -102,6 +102,7 @@ class MediaFileAdminForm(forms.ModelForm):
                                 widget=MediaFileWidget(attrs={'class': 'image-fk'}), label=_('media file'))
     class Meta:
         model = GalleryMediaFile
+        fields = ('gallery', 'mediafile', 'ordering')
 
 
 class GalleryMediaFileAdmin(admin.ModelAdmin):
