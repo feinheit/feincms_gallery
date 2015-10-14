@@ -11,7 +11,7 @@ setup(
     description='A gallery for FeinCMS',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     author='Simon Baechler',
-    author_email='sb@feinheit.ch',
+    author_email='dev@feinheit.ch',
     url='https://github.com/feinheit/feincms_gallery',
     license='BSD License',
     platforms=['OS Independent'],
