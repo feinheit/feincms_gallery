@@ -1,5 +1,6 @@
 """ Dowload fancybox from:
-    http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip
+    http://fancyapps.com/fancybox/3
+    v3.0.47
 """
 
 from django.utils.translation import ugettext_lazy as _
@@ -15,9 +16,9 @@ class ClassicLightbox(BaseSpec):
     name = 'p.classiclm'
 
     media = {
-        'css': {'all': ('lib/fancybox/jquery.fancybox-1.3.4.css',
+        'css': {'all': ('fancybox/jquery.fancybox.min.css',
                         'content/gallery/classic.css')},
-        'js': ('lib/fancybox/jquery.fancybox-1.3.4.pack.js',
+        'js': ('fancybox/jquery.fancybox.min.js',
                'content/gallery/gallery.js'),
     }
 
