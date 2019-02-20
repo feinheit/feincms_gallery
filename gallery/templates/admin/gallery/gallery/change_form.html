@@ -1,5 +1,5 @@
 {% extends "admin/change_form.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block extrahead %}{{ block.super }}
 <script type="text/javascript">
@@ -36,7 +36,7 @@
             $('.image-fk').each(function(){
                 var elem = $(this);
                 elem.siblings('span').remove().end();
-                elem.css('width', '30px').after("<span class=\"lupe mediafile\" id=\"lookup_"+this.id+"\"> <img src=\"{{ STATIC_URL }}admin/img/selector-search.gif\" alt=\"{% trans "Search" %}\" /></span>");
+                elem.css('width', '30px').after("<span class=\"lupe mediafile\" id=\"lookup_"+this.id+"\"> <img src=\"{% static 'admin/img/selector-search.gif' %}\" alt=\"{% trans "Search" %}\" /></span>");
             });
 	    $(document).on('click', 'span.lupe.mediafile', function(){
 				LoupeClicked = $(this).prev('input');

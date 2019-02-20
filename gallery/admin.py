@@ -24,8 +24,8 @@ class MediaFileWidget(forms.TextInput):
     TextInput widget, shows a link to the current value if there is one.
     """
 
-    def render(self, name, value, attrs=None):
-        inputfield = super(MediaFileWidget, self).render(name, value, attrs)
+    def render(self, name, value, attrs=None, renderer=None):
+        inputfield = super(MediaFileWidget, self).render(name, value, attrs, renderer)
         if value:
             try:
                 mf = MediaFile.objects.get(pk=value)
