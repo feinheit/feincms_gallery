@@ -18,11 +18,11 @@ __all__ = ['Gallery', 'GalleryMediaFile', 'GalleryContent', 'DEFAULT_SPECS']
 class Gallery(models.Model):
     title = models.CharField(max_length=30)
     images = models.ManyToManyField(MediaFile, through='GalleryMediaFile')
-    
+
     def ordered_images(self):
         return self.images.select_related().all()\
                                         .order_by('gallerymediafile__ordering')
-    
+
     def count_images(self):
         if not getattr(self, '_image_count', None):
             self._image_count = self.images.count()
@@ -33,25 +33,25 @@ class Gallery(models.Model):
         return ungettext_lazy('%(count)d Image',
                               '%(count)d Images', count) % {'count': count }
     verbose_images.short_description = _('Image Count')
-    
+
     class Meta:
         verbose_name = _('Gallery')
         verbose_name_plural = _('Galleries')
-    
+
     def __unicode__(self):
         return self.title
-    
+
 
 class GalleryMediaFile(models.Model):
-    gallery = models.ForeignKey(Gallery)
-    mediafile = models.ForeignKey(MediaFile)
+    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
+    mediafile = models.ForeignKey(MediaFile, on_delete=models.CASCADE)
     ordering = models.IntegerField(default=9999)
-    
+
     class Meta:
         verbose_name = 'Image for Gallery'
         verbose_name_plural = 'Images for Gallery'
         ordering = ['ordering']
-        
+
     def __unicode__(self):
         return u'%s' %self.mediafile
 
@@ -60,9 +60,9 @@ class GalleryContent(models.Model):
     @classmethod
     def initialize_type(cls, types=DEFAULT_SPECS, **kwargs):
         if 'feincms.module.medialibrary' not in settings.INSTALLED_APPS:
-            raise ImproperlyConfigured, 'You have to add \'feincms.module.'\
+            raise ImproperlyConfigured('You have to add \'feincms.module.'\
                 'medialibrary\' to your INSTALLED_APPS before creating a %s' \
-                % cls.__name__
+                % cls.__name__)
 
         cls.specs = dict([ ('%s_%s' % (spec.name, types.index(spec)), spec)
                                        for spec in types ])
@@ -72,8 +72,9 @@ class GalleryContent(models.Model):
         cls.add_to_class('type', models.CharField(max_length=20,
                                  choices=cls.spec_choices,
                                  default=cls.spec_choices[0][0]))
-        
+
     gallery = models.ForeignKey(Gallery,
+        on_delete=models.CASCADE,
         help_text=_('Choose a gallery to render here'),
         related_name='%(app_label)s_%(class)s_gallery')
 
@@ -87,10 +88,10 @@ class GalleryContent(models.Model):
     @property
     def media(self):
         return forms.Media(**self.spec.media)
-      
+
     def has_pagination(self):
         return self.spec.paginated
-        
+
     class Meta:
         abstract = True
         verbose_name = _('Image Gallery')
@@ -128,12 +129,12 @@ class GalleryContent(models.Model):
             images = objects
 
         context = {
-            'content': self, 
+            'content': self,
             'block': current_page,
-            'images': images, 
+            'images': images,
             'paginator': paginator,
-            'remaining': remaining, 
+            'remaining': remaining,
             'request': request
         }
-        
+
         return render_to_string(self.spec.templates, context=context, request=request)
