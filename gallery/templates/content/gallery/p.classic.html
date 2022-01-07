@@ -1,7 +1,7 @@
 {% load feincms_thumbnail i18n %}
 {% comment %}
 <!-- Wenn die Galerie in einem Aufklapp-Div versteckt ist,
-    muss sie bei weiteren Seiten bereits geoeffnet sein. 
+    muss sie bei weiteren Seiten bereits geoeffnet sein.
     If a gallery is hidden in a slide div it has to be
     open on paginated pages > 1.
     Uncomment this part if you use pagination and a slider div for the gallery.
@@ -32,7 +32,7 @@
                             {% block caption %}{% endblock %}
                         </a>
                     </div>
-                </div>  			    
+                </div>
             {% endblock %}
 			{% if forloop.counter|divisibleby:content.spec.columns %}
            </div>

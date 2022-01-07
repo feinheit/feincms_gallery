@@ -10,13 +10,13 @@
         </div>
         {% endif %}
     {% endfor %}
-    
+
 </div>
 
 {% comment %}
 Use this to customize the slideshow:
 For shuffling images use the randomize filter instead of the shuffle property.
-This way even the first image is random: 
+This way even the first image is random:
 
     {% load gallery_tags %}
     {% for image in images|randomize %}
@@ -24,10 +24,10 @@ This way even the first image is random:
 <script type="text/javascript">
     SQ.add(function(){
         $('#slidemood').slideshow(
-            {                
+            {
               'duration'  : 7500,
-              'shuffle' : false 
+              'shuffle' : false
             });
-    }); 
+    });
 </script>
 {% endcomment %}

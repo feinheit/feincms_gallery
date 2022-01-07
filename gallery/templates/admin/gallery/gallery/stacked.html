@@ -31,7 +31,7 @@ $ = django.jQuery;
                 containment: $('#sort-container'),
                 stop: function() {
                     $(this).find('div.inline-related').each(function(i) {
-                        if ($(this).find('.vIntegerField').val()) {    
+                        if ($(this).find('.vIntegerField').val()) {
                             $(this).find('input[id$=ordering]').val(i+1);
                         }
                     });
