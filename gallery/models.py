@@ -1,4 +1,3 @@
-#coding=utf-8
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -7,7 +6,7 @@ from django.db import models
 from django.http import HttpResponse
 from django.template.context import RequestContext
 from django.template.loader import render_to_string
-from django.utils.translation import ungettext_lazy, ugettext_lazy as _
+from django.utils.translation import ngettext_lazy, gettext_lazy as _
 
 from feincms.module.medialibrary.models import MediaFile
 
@@ -30,7 +29,7 @@ class Gallery(models.Model):
 
     def verbose_images(self):
         count = self.count_images()
-        return ungettext_lazy('%(count)d Image',
+        return ngettext_lazy('%(count)d Image',
                               '%(count)d Images', count) % {'count': count }
     verbose_images.short_description = _('Image Count')
 
@@ -53,7 +52,7 @@ class GalleryMediaFile(models.Model):
         ordering = ['ordering']
 
     def __unicode__(self):
-        return u'%s' %self.mediafile
+        return '%s' %self.mediafile
 
 
 class GalleryContent(models.Model):
@@ -64,8 +63,8 @@ class GalleryContent(models.Model):
                 'medialibrary\' to your INSTALLED_APPS before creating a %s' \
                 % cls.__name__)
 
-        cls.specs = dict([ ('%s_%s' % (spec.name, types.index(spec)), spec)
-                                       for spec in types ])
+        cls.specs = { f'{spec.name}_{types.index(spec)}': spec
+                                       for spec in types }
         cls.spec_choices = [ (spec, cls.specs[spec].verbose_name )
                                        for spec in cls.specs ]
 
