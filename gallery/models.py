@@ -37,7 +37,7 @@ class Gallery(models.Model):
         verbose_name = _('Gallery')
         verbose_name_plural = _('Galleries')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -51,7 +51,7 @@ class GalleryMediaFile(models.Model):
         verbose_name_plural = 'Images for Gallery'
         ordering = ['ordering']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' %self.mediafile
 
 

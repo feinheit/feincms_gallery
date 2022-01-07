@@ -107,7 +107,7 @@ class MediaFileAdminForm(forms.ModelForm):
 class GalleryMediaFileAdmin(admin.ModelAdmin):
     form = MediaFileAdminForm
     model = GalleryMediaFile
-    list_display = ['__unicode__', admin_thumbnail]
+    list_display = ['__str__', admin_thumbnail]
     classes = ['sortable']
 
 
