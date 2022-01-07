@@ -11,7 +11,7 @@ tempate, css and javascript files. It comes packed with several pretty types rea
 * Image carousel: a single line scrollable strip
 * Slideshow: A simple slideshow
 * Fancy panel: A fancyer slideshow with lots of different transitions
-* Product gallery: One large image with smaller thumbnails. 
+* Product gallery: One large image with smaller thumbnails.
 
 The CSS and Javascript files for the galleries are only loaded on demand using the form media class.
 

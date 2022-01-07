@@ -1,13 +1,16 @@
-from django import template
 import random
-register = template.Library()
+
+from django import template
 from django.db.models.query import QuerySet
+
+
+register = template.Library()
 
 
 @register.filter
 def randomize(values):
-    if not isinstance(values, QuerySet):
-        if isinstance(values, list):
-            return random.shuffle(values)
-        return values
-    return values.order_by('?')
+    if isinstance(values, QuerySet):
+        return values.order_by("?")
+    if isinstance(values, list):
+        return random.shuffle(values)
+    return values

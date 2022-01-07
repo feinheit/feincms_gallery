@@ -4,29 +4,32 @@
 """
 
 from django.utils.translation import gettext_lazy as _
+
 from .base import BaseSpec
 
+
 class ClassicLightbox(BaseSpec):
-    verbose_name = _('Classic Gallery with Lightbox (paginated).')
+    verbose_name = _("Classic Gallery with Lightbox (paginated).")
     paginated = True
     paginate_by = 12
     orphans = 3
     columns = 3
-    template_name = 'p.classiclm.html'
-    name = 'p.classiclm'
+    template_name = "p.classiclm.html"
+    name = "p.classiclm"
 
     media = {
-        'css': {'all': ('fancybox/jquery.fancybox.min.css',
-                        'content/gallery/classic.css')},
-        'js': ('fancybox/jquery.fancybox.min.js',
-               'content/gallery/gallery.js'),
+        "css": {
+            "all": ("fancybox/jquery.fancybox.min.css", "content/gallery/classic.css")
+        },
+        "js": ("fancybox/jquery.fancybox.min.js", "content/gallery/gallery.js"),
     }
+
 
 DEFAULT_SPECS = (ClassicLightbox(),)
 
-#TODO: write classes for all predefined gallery types:
+# TODO: write classes for all predefined gallery types:
 #
-#GALLERY_TYPE_CHOICES = (
+# GALLERY_TYPE_CHOICES = (
 #    #('p.classic' , _('Classic Gallery with full size lightbox.')),
 #    #('p.clasiccaption' , _('Classic Gallery with caption and full size lightbox.')),
 #    ('p.classiclm', _('Classic Gallery with Lightbox.')),
@@ -37,9 +40,9 @@ DEFAULT_SPECS = (ClassicLightbox(),)
 #    ('product', _('Product Gallery')),
 #    )
 #
-#standard_gallery_media = {'css':{'all':('content/gallery/classic.css',)}}
+# standard_gallery_media = {'css':{'all':('content/gallery/classic.css',)}}
 #
-#DEFAULT_FORM_MEDIA_DICT = {'gallery': {'css': {'all': ('lib/fancybox/jquery.fancybox-1.3.1.css', )},
+# DEFAULT_FORM_MEDIA_DICT = {'gallery': {'css': {'all': ('lib/fancybox/jquery.fancybox-1.3.1.css', )},
 #                                       'js': ('lib/fancybox/jquery.fancybox-1.3.1.pack.js',
 #                                              '/media/content/gallery/gallery.js')},
 #                           'gallery_p.classic': standard_gallery_media,
