@@ -1,5 +1,5 @@
-from .base import Type
+from .base import BaseSpec, Type
 from .legacy import DEFAULT_SPECS, ClassicLightbox
 
 
-__all__ = ["Type", "ClassicLightbox", "DEFAULT_SPECS"]
+__all__ = ["BaseSpec", "Type", "ClassicLightbox", "DEFAULT_SPECS"]
