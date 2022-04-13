@@ -7,6 +7,15 @@
     var feincms = {
         "jQuery": jQuery
     };
+
+    // copied from older django version
+    var uniqueness=(new Date()).valueOf();
+    function id_to_windowname(text) {
+       text = text.replace(/\./g, '__dot__');
+       text = text.replace(/\-/g, '__dash__');
+       return uniqueness + text;
+    }
+
    function update_thumbnail(){
 		var field = jQuery(this);
         jQuery.post('{% url "gallery_admin_thumbnail" %}',
@@ -36,7 +45,7 @@
             $('.image-fk').each(function(){
                 var elem = $(this);
                 elem.siblings('span').remove().end();
-                elem.css('width', '30px').after("<span class=\"lupe mediafile\" id=\"lookup_"+this.id+"\"> <img src=\"{% static 'admin/img/selector-search.gif' %}\" alt=\"{% trans "Search" %}\" /></span>");
+                elem.css('width', '30px').after("<span class=\"lupe mediafile\" id=\"lookup_"+this.id+"\"> <img src=\"{% static 'admin/img/search.svg' %}\" alt=\"{% trans "Search" %}\" /></span>");
             });
 	    $(document).on('click', 'span.lupe.mediafile', function(){
 				LoupeClicked = $(this).prev('input');
