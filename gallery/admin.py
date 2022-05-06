@@ -1,7 +1,9 @@
 import json
 
+from admin_ordering.admin import OrderableAdmin
 from django import forms
 from django.contrib import admin
+from django.contrib.admin import helpers
 from django.core.exceptions import FieldError, ObjectDoesNotExist
 from django.http import (
     HttpResponse,
@@ -85,7 +87,7 @@ def admin_thumbnail(request):
                 try:
                     caption = obj.translation.caption
                 except AttributeError:
-                    caption = _("untitled").encode("utf-8")
+                    caption = _("untitled")
                 content = json.dumps({"url": image.url, "name": escapejs(caption)})
         return HttpResponse(content, content_type="application/json")
     else:
@@ -115,14 +117,13 @@ class GalleryMediaFileAdmin(admin.ModelAdmin):
     classes = ["sortable"]
 
 
-class GalleryMediaFileInline(admin.StackedInline):
+class GalleryMediaFileInline(OrderableAdmin, admin.TabularInline):
     model = GalleryMediaFile
-    raw_id_fields = ("mediafile",)
+    raw_id_fields = ["mediafile"]
     extra = 0
-    form = MediaFileAdminForm
-    classes = ["sortable"]
+    # form = MediaFileAdminForm
+    # template = "admin/gallery/gallery/stacked.html"
     ordering = ["ordering"]
-    template = "admin/gallery/gallery/stacked.html"
 
 
 class GalleryAdmin(admin.ModelAdmin):
@@ -150,21 +151,20 @@ class GalleryAdmin(admin.ModelAdmin):
                         except FieldError:
                             pass
                         count += 1
-                message = (
-                    ngettext(
-                        "Successfully added %(count)d mediafiles in %(category)s Category.",
-                        "Successfully added %(count)d mediafiles in %(category)s Categories.",
-                        count,
-                    )
-                    % {"count": count, "category": category}
-                )
+                message = ngettext(
+                    "Successfully added %(count)d mediafiles in %(category)s Category.",
+                    "Successfully added %(count)d mediafiles in %(category)s Categories.",
+                    count,
+                ) % {"count": count, "category": category}
                 self.message_user(request, message)
                 return HttpResponseRedirect(request.get_full_path())
 
         if not form:
             form = self.AddCategoryForm(
                 initial={
-                    "_selected_action": request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+                    "_selected_action": request.POST.getlist(
+                        helpers.ACTION_CHECKBOX_NAME
+                    )
                 }
             )
         return render(
