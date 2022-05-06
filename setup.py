@@ -29,4 +29,8 @@ setup(
         "Topic :: Software Development",
         "Topic :: Software Development :: Libraries :: Application Frameworks",
     ],
+    install_requires=[
+        "Django>=3.2",
+        "django-admin-ordering",
+    ],
 )
