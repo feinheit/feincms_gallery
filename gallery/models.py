@@ -6,6 +6,7 @@ from django.db import models
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _, ngettext_lazy
+from feincms.module.medialibrary.fields import MediaFileForeignKey
 from feincms.module.medialibrary.models import MediaFile
 
 from .specs.legacy import DEFAULT_SPECS
@@ -44,7 +45,7 @@ class Gallery(models.Model):
 
 class GalleryMediaFile(models.Model):
     gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
-    mediafile = models.ForeignKey(MediaFile, on_delete=models.CASCADE)
+    mediafile = MediaFileForeignKey(MediaFile, on_delete=models.CASCADE)
     ordering = models.IntegerField(default=9999)
 
     class Meta:
