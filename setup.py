@@ -32,5 +32,6 @@ setup(
     install_requires=[
         "Django>=3.2",
         "django-admin-ordering",
+        "FeinCMS>=22.2.0",
     ],
 )
