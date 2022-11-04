@@ -94,7 +94,7 @@ jQuery.extend(jQuery.easing, {
                 imageArray[0] +
                 '"><img src="' +
                 imageArray[1] +
-                '">'
+                '">',
             )
             $("img:eq(1)", obj)
               .css({ position: "absolute", top: "0", left: "0" })
@@ -131,7 +131,7 @@ jQuery.extend(jQuery.easing, {
                     boxLeft +
                     "px -" +
                     boxTop +
-                    'px"></div>'
+                    'px"></div>',
                 )
                 boxes.push("r" + r + "c" + c + "_" + randID)
               }
@@ -168,7 +168,7 @@ jQuery.extend(jQuery.easing, {
                   for (var y = 0; y <= total; y++) {
                     if (x + y == total)
                       $("#r" + x + "c" + y + "_" + randID).fadeIn(
-                        o.boxFadeDuration
+                        o.boxFadeDuration,
                       )
                   }
                 }
@@ -188,7 +188,7 @@ jQuery.extend(jQuery.easing, {
                   for (var y = total; y >= 0; y--) {
                     if (x + y == total)
                       $("#r" + x + "c" + y + "_" + randID).fadeIn(
-                        o.boxFadeDuration
+                        o.boxFadeDuration,
                       )
                   }
                 }
@@ -207,7 +207,7 @@ jQuery.extend(jQuery.easing, {
                 var total = 0
                 for (var j = i; j <= rows; j++) {
                   $("#r" + j + "c" + total + "_" + randID).fadeIn(
-                    o.boxFadeDuration
+                    o.boxFadeDuration,
                   )
                   total++
                 }
@@ -227,7 +227,7 @@ jQuery.extend(jQuery.easing, {
                 var total = 0
                 for (var j = i; j <= cols; j++) {
                   $("#r" + total + "c" + j + "_" + randID).fadeIn(
-                    o.boxFadeDuration
+                    o.boxFadeDuration,
                   )
                   total++
                 }
@@ -306,7 +306,7 @@ jQuery.extend(jQuery.easing, {
                   panelLeft +
                   "px -" +
                   0 +
-                  'px"></div>'
+                  'px"></div>',
               )
               $(obj).append(
                 '<div id="bottom_' +
@@ -321,7 +321,7 @@ jQuery.extend(jQuery.easing, {
                   panelLeft +
                   "px -" +
                   0 +
-                  'px"></div>'
+                  'px"></div>',
               )
             }
             for (var v = 0; v <= vertPanels; v++) {
@@ -339,7 +339,7 @@ jQuery.extend(jQuery.easing, {
                   0 +
                   "px -" +
                   panelTop +
-                  'px"></div>'
+                  'px"></div>',
               )
               $(obj).append(
                 '<div id="right_' +
@@ -354,7 +354,7 @@ jQuery.extend(jQuery.easing, {
                   0 +
                   "px -" +
                   panelTop +
-                  'px"></div>'
+                  'px"></div>',
               )
             }
             $(".horizPanel", obj)
@@ -647,7 +647,7 @@ jQuery.extend(jQuery.easing, {
                 $("#left_" + i + "_" + randID)
                   .css(
                     "background-position",
-                    imgDimensions.width / 2 + "px -" + v + "px"
+                    imgDimensions.width / 2 + "px -" + v + "px",
                   )
                   .animate({
                     left: "-" + imgDimensions.width / 2 + "px",
@@ -656,7 +656,7 @@ jQuery.extend(jQuery.easing, {
                 $("#right_" + i + "_" + randID)
                   .css(
                     "background-position",
-                    "-" + imgDimensions.width / 2 + "px -" + v + "px"
+                    "-" + imgDimensions.width / 2 + "px -" + v + "px",
                   )
                   .animate({
                     left: imgDimensions.width / 2 + "px",
@@ -682,7 +682,7 @@ jQuery.extend(jQuery.easing, {
                 $("#top_" + i + "_" + randID)
                   .css(
                     "background-position",
-                    "-" + h + "px " + imgDimensions.height / 2 + "px"
+                    "-" + h + "px " + imgDimensions.height / 2 + "px",
                   )
                   .animate({
                     top: "-" + imgDimensions.height / 2 + "px",
@@ -691,7 +691,7 @@ jQuery.extend(jQuery.easing, {
                 $("#bottom_" + i + "_" + randID)
                   .css(
                     "background-position",
-                    "-" + h + "px " + "-" + imgDimensions.height / 2 + "px"
+                    "-" + h + "px " + "-" + imgDimensions.height / 2 + "px",
                   )
                   .animate({
                     top: imgDimensions.height / 2 + "px",
@@ -827,7 +827,7 @@ jQuery.extend(jQuery.easing, {
                   panelLeft +
                   "px -" +
                   0 +
-                  'px"></div>'
+                  'px"></div>',
               )
             }
             for (v = 0; v <= vertPanels; v++) {
@@ -843,7 +843,7 @@ jQuery.extend(jQuery.easing, {
                   0 +
                   "px -" +
                   panelTop +
-                  'px"></div>'
+                  'px"></div>',
               )
             }
             $(".horizPanel", obj)
@@ -871,7 +871,7 @@ jQuery.extend(jQuery.easing, {
                 if (blinds) $("#left_" + i + "_" + randID).height(0)
                 $("#left_" + i + "_" + randID).animate(
                   { opacity: "1", height: o.panelWidth + "px" },
-                  o.transitionDuration
+                  o.transitionDuration,
                 )
                 i = name == "overlayTopDown" ? i + 1 : i - 1
                 if (name == "overlayTopDown" && i <= vertPanels) {
@@ -890,7 +890,7 @@ jQuery.extend(jQuery.easing, {
                 if (blinds) $("#top_" + i + "_" + randID).width(0)
                 $("#top_" + i + "_" + randID).animate(
                   { opacity: "1", width: o.panelWidth + "px" },
-                  o.transitionDuration
+                  o.transitionDuration,
                 )
                 i = name == "overlayLeftRight" ? i + 1 : i - 1
                 if (name == "overlayLeftRight" && i <= horizPanels) {
@@ -922,7 +922,7 @@ jQuery.extend(jQuery.easing, {
                   panelLeft +
                   "px -" +
                   0 +
-                  'px"></div>'
+                  'px"></div>',
               )
               for (var i = 0; i <= 9; i++) {
                 $("#top_" + h + "_" + randID).append(
@@ -930,7 +930,7 @@ jQuery.extend(jQuery.easing, {
                     panelLeft +
                     'px" src="' +
                     imageArrayCopy[0] +
-                    '"><br />'
+                    '"><br />',
                 )
                 imageArrayCopy.push(imageArrayCopy.shift())
               }
@@ -939,7 +939,7 @@ jQuery.extend(jQuery.easing, {
                   panelLeft +
                   'px" src="' +
                   imageArray[0] +
-                  '"><br />'
+                  '"><br />',
               )
             }
             $(".horizPanel", obj)
@@ -956,7 +956,7 @@ jQuery.extend(jQuery.easing, {
             function jackpot() {
               $("#top_" + i + "_" + randID).animate(
                 { top: "0px" },
-                { duration: o.transitionDuration * 3, easing: "easeInOutExpo" }
+                { duration: o.transitionDuration * 3, easing: "easeInOutExpo" },
               )
               i++
               if (i <= 2) {
@@ -976,7 +976,7 @@ jQuery.extend(jQuery.easing, {
               $(obj).append(
                 '<img style="position:absolute;top:0;left:0" src="' +
                   imageArray[currentImage + 1] +
-                  '">'
+                  '">',
               )
               $(".box", obj).remove() // Remove all div boxes - we'll rebuild them quickly
               $(".horizPanel", obj).remove() // Remove all panels - we'll rebuild them quickly
@@ -1051,7 +1051,7 @@ jQuery.extend(jQuery.easing, {
             "overlayBottomUp,false",
             "overlayLeftRight,false",
             "overlayRightLeft,false",
-            "jackpot"
+            "jackpot",
           )
 
           var randFX = Math.floor(Math.random() * randomFXarray.length)

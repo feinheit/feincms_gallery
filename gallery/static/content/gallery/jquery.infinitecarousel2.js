@@ -81,7 +81,7 @@
           $(obj).append(
             '<div id="progress' +
               randID +
-              '" class="ic-progress-bar" style="position:absolute;bottom:0;background:#bbb;left:0;z-index:1"></div>'
+              '" class="ic-progress-bar" style="position:absolute;bottom:0;background:#bbb;left:0;z-index:1"></div>',
           )
           $("#progress" + randID)
             .width("100%")
@@ -114,7 +114,7 @@
               imgWidth +
               "px;bottom:0px;margin-bottom:" +
               -(imgHeight * o.textholderHeight + containerBorder) +
-              'px;"><span></span></div>'
+              'px;"><span></span></div>',
           )
           $("#textholder" + randID + "_" + i).css({
             left: (i - 1) * (imgWidth + parseInt(o.padding) * 2),
@@ -160,7 +160,7 @@
                 marginBottom:
                   -imgHeight * o.textholderHeight - containerBorder - 1 + "px",
               },
-              500
+              500,
             )
           })
         })
@@ -169,7 +169,7 @@
           $(this).click(function () {
             if (
               parseInt(
-                $("#textholder" + randID + "_" + (i + 1)).css("margin-bottom")
+                $("#textholder" + randID + "_" + (i + 1)).css("margin-bottom"),
               ) == 0
             ) {
               $("#textholder" + randID + "_" + (i + 1)).animate(
@@ -184,9 +184,9 @@
                 function () {
                   $("#minmax" + randID + "_" + (i + 1)).css(
                     "background-position",
-                    "0 -16px"
+                    "0 -16px",
                   )
-                }
+                },
               )
             } else {
               $("#textholder" + randID + "_" + (i + 1)).animate(
@@ -195,9 +195,9 @@
                 function () {
                   $("#minmax" + randID + "_" + (i + 1)).css(
                     "background-position",
-                    "0 -8px"
+                    "0 -8px",
                   )
-                }
+                },
               )
             }
           })
@@ -233,7 +233,7 @@
                 marginBottom:
                   -imgHeight * o.textholderHeight - containerBorder - 1 + "px",
               },
-              o.transitionSpeed
+              o.transitionSpeed,
             )
         }
 
@@ -253,7 +253,7 @@
               setTimeout(function () {
                 $("#play_pause_btn" + randID).css(
                   "background-position",
-                  "0 -16px"
+                  "0 -16px",
                 )
               }, o.transitionSpeed)
               $("#play_pause_btn" + randID)
@@ -278,7 +278,7 @@
           $(obj).after(
             '<div id="thumbs' +
               randID +
-              '" style="position:relative;overflow:auto;clear:left;text-align:left;padding-top:5px;"></div>'
+              '" style="position:relative;overflow:auto;clear:left;text-align:left;padding-top:5px;"></div>',
           )
           for (i = 0; i <= numImages - 1; i++) {
             thumb = $("img:eq(" + (i + 1) + ")", obj).attr("src")
@@ -299,7 +299,7 @@
                 o.thumbnailFontSize +
                 ';font-family:Arial;color:#000;text-shadow:0 0 3px #fff">' +
                 (i + 1) +
-                "</div>"
+                "</div>",
             )
             if (i <= o.inView)
               $("#thumb" + randID + "_" + i).css({ "border-color": "#ff0000" })
@@ -324,7 +324,7 @@
             function () {
               if (viewable[0] != this.id.split("_")[1])
                 $(this).animate({ opacity: 0.65 }, 250)
-            }
+            },
           ) // add hover to thumbs
           // Assign click handler for the thumbnails. Normally the format $('.thumb') would work but since it's outside of our object (obj) it would get called multiple times
           $("#thumbs" + randID + " div").bind("click", thumbclick) // We use bind instead of just plain click so that we can repeatedly remove and reattach the handler
@@ -353,7 +353,7 @@
               },
               function () {
                 $(this).animate({ opacity: ".5" }, 250)
-              }
+              },
             )
           $("#play_pause_btn" + randID).click(function () {
             status = status == "play" ? "pause" : "play"
@@ -371,7 +371,7 @@
                 $(obj).width() +
                   40 +
                   parseInt($(obj).css("padding-left")) +
-                  parseInt($(obj).css("padding-right"))
+                  parseInt($(obj).css("padding-right")),
               )
           }
 
@@ -408,7 +408,7 @@
               },
               function () {
                 $(this).animate({ opacity: ".5" }, 250)
-              }
+              },
             )
           $("#btn_lt" + randID)
             .css("opacity", 0.5)
@@ -421,7 +421,7 @@
               },
               function () {
                 $(this).animate({ opacity: ".5" }, 250)
-              }
+              },
             )
 
           if (o.autoHideControls && o.prevNextInternal) {
@@ -444,7 +444,7 @@
                     top: -16 - containerBorder + "px",
                     right: -16 - containerBorder + "px",
                   },
-                  250
+                  250,
                 )
               $("#btn_rt" + randID)
                 .stop()
@@ -637,7 +637,7 @@
               if (o.displayTime == 0) {
                 moveLeft()
               }
-            }
+            },
           )
         }
         function moveRight(dist) {
@@ -656,7 +656,7 @@
           $("ul", obj)
             .css(
               "left",
-              -(imgWidth * (dist + 1)) - parseInt(o.padding) * ((dist + 1) * 2)
+              -(imgWidth * (dist + 1)) - parseInt(o.padding) * ((dist + 1) * 2),
             )
             .animate(
               { left: -imgWidth - parseInt(o.padding) * 2 },
@@ -665,7 +665,7 @@
               function () {
                 $("li:gt(" + (numImages - 1) + ")", obj).remove()
                 postMove()
-              }
+              },
             )
         }
 

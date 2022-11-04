@@ -20,6 +20,7 @@ class GalleryMediaFileInline(OrderableAdmin, admin.TabularInline):
     ordering = ["ordering"]
 
 
+@admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
     inlines = [GalleryMediaFileInline]
     list_display = ["title", "verbose_images"]
@@ -28,6 +29,7 @@ class GalleryAdmin(admin.ModelAdmin):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
         category = forms.ModelChoiceField(Category.objects)
 
+    @admin.action(description=_("Assign Images from a Category to this Gallery"))
     def assign_category(self, request, queryset):
         form = None
         if "apply" in request.POST:
@@ -70,10 +72,4 @@ class GalleryAdmin(admin.ModelAdmin):
             },
         )
 
-    assign_category.short_description = _(
-        "Assign Images from a Category to this Gallery"
-    )
     actions = [assign_category]
-
-
-admin.site.register(Gallery, GalleryAdmin)
